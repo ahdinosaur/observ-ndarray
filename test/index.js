@@ -59,8 +59,10 @@ test("ObservNdarray emits change", function (t) {
   t.ok(changes[0]._diff);
   t.equal(Object.keys(changes[0]).indexOf("_diff"), -1);
   t.deepEqual(changes[0]._diff, [0, 1, "foo2"]);
-  t.deepEqual(changes[0].slice(), ["foo2", "bar"]);
-  t.deepEqual(changes[1].slice(), ["foo2", "bar2"]);
+  t.deepEqual(changes[0].get(0), "foo2");
+  t.deepEqual(changes[0].get(1), "bar");
+  t.deepEqual(changes[1].get(0), "foo2");
+  t.deepEqual(changes[1].get(1), "bar2");
 
   t.end();
 });
