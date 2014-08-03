@@ -32,7 +32,6 @@ function ObservNdarray (initialNdarray) {
   obs._ndarray = ndarray;
 
   obs = methods(obs);
-  obs = properties(obs);
 
   obs._removeListeners = ndarray.data.map(function (observ) {
     return typeof observ === 'function' ?
