@@ -1,6 +1,6 @@
 {
   "name": "observ-ndarray",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "An ndarray containing observable values",
   "main": "index.js",
   "scripts": {
