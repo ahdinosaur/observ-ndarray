@@ -14,11 +14,11 @@ var ObservNdarray = require('observ-ndarray');
 var Observ = require('observ');
 var Ndarray = require('ndarray');
 
-var createPixel (red, green, blue) {
+function createPixel (red, green, blue) {
   return ObservStruct({
-    red: red,
-    green: green,
-    blue: blue,
+    red: Observ(red),
+    green: Observ(green),
+    blue: Observ(blue),
   });
 }
 
@@ -27,12 +27,13 @@ var state = ObservStruct({
     createPixel(0, 0, 0),
     createPixel(128, 128, 128),
     createPixel(256, 256, 256),
-    createPixel(128, 128, 128),
     createPixel(0, 0, 0),
     createPixel(128, 128, 128),
     createPixel(256, 256, 256),
+    createPixel(0, 0, 0),
     createPixel(128, 128, 128),
-  ], [4, 4])),
+    createPixel(256, 256, 256),
+  ], [3, 3])),
 });
 
 state(function (currState) {
@@ -44,4 +45,10 @@ state(function (currState) {
     }
   }
 });
+
+state.grid.get(0, 0).red.set(256);
+console.log("---");
+state.grid.get(0, 0).green.set(256);
+console.log("---");
+state.grid.get(0, 0).blue.set(256);
 ```
