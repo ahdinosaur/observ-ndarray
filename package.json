@@ -1,0 +1,32 @@
+{
+  "name": "observ-ndarray",
+  "version": "0.0.0",
+  "description": "An ndarray containing observable values",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ahdinosaur/observ-ndarray"
+  },
+  "keywords": [
+    "ndarray",
+    "observ",
+    "observable",
+    "array"
+  ],
+  "author": "ahdinosaur",
+  "license": "AGPLv3",
+  "bugs": {
+    "url": "https://github.com/ahdinosaur/observ-ndarray/issues"
+  },
+  "homepage": "https://github.com/ahdinosaur/observ-ndarray",
+  "dependencies": {
+    "ndarray": "^1.0.15",
+    "observ": "^0.2.0"
+  },
+  "devDependencies": {
+    "tape": "^2.13.4"
+  }
+}
