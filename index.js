@@ -21,8 +21,8 @@ function ObservNdarray (initialNdarray) {
 
   var initialState = new ndarray.constructor(
     ndarray.data.slice(),
-    ndarray.shape,
-    ndarray.stride,
+    ndarray.shape.slice(),
+    ndarray.stride.slice(),
     ndarray.offset
   );
 
