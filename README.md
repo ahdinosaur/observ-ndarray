@@ -28,7 +28,7 @@ var state = ObservStruct({
     createPixel(128, 128, 128),
     createPixel(256, 256, 256),
     createPixel(128, 128, 128),
-    createPixel(0, 0, 0, 0),
+    createPixel(0, 0, 0),
     createPixel(128, 128, 128),
     createPixel(256, 256, 256),
     createPixel(128, 128, 128),
@@ -38,8 +38,8 @@ var state = ObservStruct({
 state(function (currState) {
   // currState.grid is an ndarray
   // currState.grid.get(0, 0) is a plain object
-  for (var i = 0; i < currState.grid.shape[0]) {
-    for (var j = 0; j < currState.grid.shape[1]) {
+  for (var i = 0; i < currState.grid.shape[0]; i++) {
+    for (var j = 0; j < currState.grid.shape[1]; j++) {
       console.log(currState.grid.get(i, j));
     }
   }
