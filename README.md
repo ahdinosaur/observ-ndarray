@@ -13,6 +13,8 @@ var ObservStruct = require('observ-struct');
 var ObservNdarray = require('observ-ndarray');
 var Observ = require('observ');
 var Ndarray = require('ndarray');
+var rgbHex = require('rgb-hex');
+var kuler = require('kuler');
 
 function createPixel (red, green, blue) {
   return ObservStruct({
@@ -24,15 +26,15 @@ function createPixel (red, green, blue) {
 
 var state = ObservStruct({
   grid: ObservNdarray(new Ndarray([
-    createPixel(0, 0, 0),
-    createPixel(128, 128, 128),
-    createPixel(256, 256, 256),
-    createPixel(0, 0, 0),
-    createPixel(128, 128, 128),
-    createPixel(256, 256, 256),
-    createPixel(0, 0, 0),
-    createPixel(128, 128, 128),
-    createPixel(256, 256, 256),
+    createPixel(255, 0, 0),
+    createPixel(0, 255, 0),
+    createPixel(0, 0, 255),
+    createPixel(0, 255, 255),
+    createPixel(255, 255, 0),
+    createPixel(255, 255, 255),
+    createPixel(255, 0, 0),
+    createPixel(0, 255, 0),
+    createPixel(0, 0, 255),
   ], [3, 3])),
 });
 
@@ -41,14 +43,17 @@ state(function (currState) {
   // currState.grid.get(0, 0) is a plain object
   for (var i = 0; i < currState.grid.shape[0]; i++) {
     for (var j = 0; j < currState.grid.shape[1]; j++) {
-      console.log(currState.grid.get(i, j));
+      var pixel = currState.grid.get(i, j);
+      var color = rgbHex(pixel.red, pixel.green, pixel.blue);
+      process.stdout.write(kuler('•').style(color));
     }
+    process.stdout.write('\n');
   }
 });
 
-state.grid.get(0, 0).red.set(256);
+state.grid.get(0, 0).red.set(255);
 console.log("---");
-state.grid.get(0, 0).green.set(256);
+state.grid.get(0, 0).green.set(255);
 console.log("---");
-state.grid.get(0, 0).blue.set(256);
+state.grid.get(0, 0).blue.set(255);
 ```
