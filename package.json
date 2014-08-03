@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/ahdinosaur/observ-ndarray",
   "dependencies": {
+    "isndarray": "^0.1.0",
     "ndarray": "^1.0.15",
     "observ": "^0.2.0"
   },
