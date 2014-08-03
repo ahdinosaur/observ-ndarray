@@ -19,7 +19,7 @@ function ObservNdarray (initialNdarray) {
     throw err;
   };
 
-  var initialState = new ndarray.constructor(
+  var initialState = new Ndarray(
     ndarray.data.slice(),
     ndarray.shape.slice(),
     ndarray.stride.slice(),
