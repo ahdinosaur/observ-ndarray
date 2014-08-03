@@ -5,6 +5,7 @@ var isNdarray = require('isndarray');
 module.exports = ObservNdarray;
 
 var addListener = require('./lib/add-listener');
+var clone = require('./lib/clone');
 var methods = require('./lib/methods');
 var properties = require('./lib/properties');
 
@@ -19,12 +20,7 @@ function ObservNdarray (initialNdarray) {
     throw err;
   };
 
-  var initialState = new Ndarray(
-    ndarray.data.slice(),
-    ndarray.shape.slice(),
-    ndarray.stride.slice(),
-    ndarray.offset
-  );
+  var initialState = clone(ndarray);
 
   ndarray.data.forEach(function (observ, index) {
     initialState.data[index] = typeof observ === 'function' ?
