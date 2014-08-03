@@ -1,5 +1,6 @@
 var Observ = require('observ');
 var Ndarray = require('ndarray');
+var isNdarray = require('isndarray');
 
 module.exports = ObservNdarray;
 
@@ -8,7 +9,15 @@ var methods = require('./lib/methods');
 var properties = require('./lib/properties');
 
 function ObservNdarray (initialNdarray) {
+
   var ndarray = initialNdarray;
+
+  if (!isNdarray(ndarray)) {
+    var message = "observ-ndarray: Function expects input to be ndarray.";
+    var err = new Error(message);
+    err.input = input;
+    throw err;
+  };
 
   var initialState = new ndarray.constructor(
     ndarray.data.slice(),
