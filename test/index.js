@@ -36,7 +36,7 @@ test("ObservNdarray contains initial value", function (t) {
   t.end();
 });
 
-test("ObservNdarray emits change", function (t) {
+test("ObservNdarray emits changes", function (t) {
   var arr = ObservNdarray(new Ndarray([
       Observ("foo"),
       Observ("bar"),
@@ -65,4 +65,28 @@ test("ObservNdarray emits change", function (t) {
   t.deepEqual(changes[1].get(1), "bar2");
 
   t.end();
+});
+
+test("ObservNdarray emits property changes", function (t) {
+  var arr = ObservNdarray(new Ndarray([
+      Observ("foo"),
+      Observ("bar"),
+      Observ("foobar"),
+      Observ("barfoo"),
+  ], [2, 2]));
+
+  var value = arr();
+
+  arr(function (state) {
+    value = state;
+  });
+
+  t.deepEqual(value.shape.slice(), [2, 2]);
+
+  arr.set('shape', [1, 4]);
+
+  t.deepEqual(value.shape.slice(), [1, 4]);
+
+
+  t.end()
 });
