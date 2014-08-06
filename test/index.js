@@ -90,3 +90,9 @@ test("ObservNdarray emits property changes", function (t) {
 
   t.end()
 });
+
+test("ObservNdarray throws error when not given ndarray as input", function (t) {
+  var errMsg = "observ-ndarray: Function expects input to be ndarray.";
+  t.throws(function () { new ObservNdarray() }, errMsg);
+  t.end();
+});

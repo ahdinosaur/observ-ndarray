@@ -16,7 +16,7 @@ function ObservNdarray (initialNdarray) {
   if (!isNdarray(ndarray)) {
     var message = "observ-ndarray: Function expects input to be ndarray.";
     var err = new Error(message);
-    err.input = input;
+    err.input = ndarray;
     throw err;
   };
 
