@@ -67,7 +67,13 @@ test("ObservNdarray emits changes", function (t) {
   t.end();
 });
 
-test("ObservNdarray emits property changes", function (t) {
+test("ObservNdarray throws error when not given ndarray as input", function (t) {
+  var errMsg = "observ-ndarray: Function expects input to be ndarray.";
+  t.throws(function () { new ObservNdarray() }, errMsg);
+  t.end();
+});
+
+test("ObservNdarray emits shape changes", function (t) {
   var arr = ObservNdarray(new Ndarray([
       Observ("foo"),
       Observ("bar"),
@@ -82,17 +88,23 @@ test("ObservNdarray emits property changes", function (t) {
   });
 
   t.deepEqual(value.shape.slice(), [2, 2]);
+  t.deepEqual(value.get(0, 0), "foo");
+  t.deepEqual(value.get(0, 1), "bar");
+  t.deepEqual(value.get(1, 0), "foobar");
+  t.deepEqual(value.get(1, 1), "barfoo");
+  t.deepEqual(value.get(0, 2), undefined);
+  t.deepEqual(value.get(1, 2), undefined);
 
   arr.set('shape', [1, 4]);
 
   t.deepEqual(value.shape.slice(), [1, 4]);
 
+  t.deepEqual(value.get(0, 0), "foo");
+  t.deepEqual(value.get(0, 1), "bar");
+  t.deepEqual(value.get(0, 2), "foobar");
+  t.deepEqual(value.get(0, 3), "barfoo");
+  t.deepEqual(value.get(0, 4), undefined);
+  t.deepEqual(value.get(1, 0), undefined);
 
   t.end()
-});
-
-test("ObservNdarray throws error when not given ndarray as input", function (t) {
-  var errMsg = "observ-ndarray: Function expects input to be ndarray.";
-  t.throws(function () { new ObservNdarray() }, errMsg);
-  t.end();
-});
+})
