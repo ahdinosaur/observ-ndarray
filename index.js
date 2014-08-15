@@ -1,42 +1,80 @@
 var Observ = require('observ');
+var ObservArray = require('observ-array');
 var Ndarray = require('ndarray');
 var isNdarray = require('isndarray');
 
-module.exports = ObservNdarray;
+function ObservNdarray () {
 
-var addListener = require('./lib/add-listener');
-var clone = require('./lib/clone');
-var methods = require('./lib/methods');
-var properties = require('./lib/properties');
+  var data, shape, stride, constructor;
 
-function ObservNdarray (initialNdarray) {
+  if (isNdarray(arguments[0])) {
+    // ndarray given
+    var ndarray = arguments[0];
+    data = ndarray.data.slice();
+    shape = ndarray.shape.slice();
+    stride = ndarray.stride.slice();
+    constructor = arguments[1] && arguments[1].constructor || Ndarray;
+  } else {
+    // ndarray arguments given
+    data = arguments[0];
+    shape = arguments[1];
+    stride = arguments[2];
+    constuctor = arguments[3] && arguments[3].constructor || Ndarray;
+  }
 
-  var ndarray = initialNdarray;
+  // create observable
+  var obs = Observ();
 
-  if (!isNdarray(ndarray)) {
-    var message = "observ-ndarray: Function expects input to be ndarray.";
-    var err = new Error(message);
-    err.input = ndarray;
-    throw err;
+  // set observable arguments
+  obs.data = typeof data === 'function' ? data : ObservArray(data);
+  obs.shape = typeof shape === 'function' ? shape : ObservArray(shape);
+  obs.stride = typeof stride === 'function' ? stride : ObservArray(stride);
+
+  // store original set function
+  obs._set = obs.set;
+
+  // initialize value
+  var lastValue = constructor(obs.data(), obs.shape(), obs.stride());
+
+  // define index
+  obs.index = function () {
+    return lastValue.index.apply(lastValue, arguments);
+  }
+
+  // define get
+  obs.get = function () {
+    return lastValue.get.apply(lastValue, arguments);
+  }
+
+  // define set
+  obs.set = function () {
+    if (arguments.length === 1) {
+      obs._set(arguments[0]);
+      return
+    }
+    var args = Array.prototype.slice.apply(arguments);
+    obs.data.put(
+      obs.index.apply(
+        obs.index, args.slice(0, args.length - 1)
+      ),
+      args[args.length - 1]
+    );
+  }
+
+  var update = function update () {
+    lastValue = constructor(obs.data(), obs.shape(), obs.stride())
+    obs.set(lastValue);
   };
 
-  var initialState = clone(ndarray);
+  obs._removeListeners = [
+    obs.data(update),
+    obs.shape(update),
+    obs.stride(update),
+  ];
 
-  ndarray.data.forEach(function (observ, index) {
-    initialState.data[index] = typeof observ === 'function' ?
-      observ() : observ
-  });
-
-  var obs = Observ(initialState);
-
-  obs._ndarray = ndarray;
-
-  obs = methods(obs);
-
-  obs._removeListeners = ndarray.data.map(function (observ) {
-    return typeof observ === 'function' ?
-      addListener(obs, observ) : null
-  });
+  update();
 
   return obs;
 }
+
+module.exports = ObservNdarray;
