@@ -43,7 +43,8 @@ function ObservNdarray () {
 
   // define get
   obs.get = function () {
-    return lastValue.get.apply(lastValue, arguments);
+    var index = obs.index.apply(obs, arguments);
+    return obs.data.get(index);
   }
 
   // define set
