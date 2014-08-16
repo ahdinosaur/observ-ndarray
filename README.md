@@ -1,6 +1,6 @@
 # observ-ndarray
 
-an [ndarray](http://npmjs.org/ndarray) containing observable values
+an [observable](http://npmjs.org/observ) [ndarray](http://npmjs.org/ndarray)
 
 ## example
 
