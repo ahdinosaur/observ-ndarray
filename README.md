@@ -2,8 +2,6 @@
 
 an [ndarray](http://npmjs.org/ndarray) containing observable values
 
-### WORK IN PROGRESS
-
 ## example
 
 an `ObservNdarray` is an observable version of an [ndarray](http://npmjs.org/ndarray), every mutation of the array or mutation of an observable element in the array will cause the `ObservNdarray` to emit a new changed [ndarray](http://npmjs.org/ndarray).
