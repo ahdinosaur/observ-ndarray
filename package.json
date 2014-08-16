@@ -1,7 +1,7 @@
 {
   "name": "observ-ndarray",
   "version": "0.4.1",
-  "description": "An ndarray containing observable values",
+  "description": "an observable ndarray",
   "main": "index.js",
   "scripts": {
     "test": "tape test"
