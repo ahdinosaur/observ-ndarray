@@ -56,7 +56,7 @@ function ObservNdarray () {
     var args = Array.prototype.slice.apply(arguments);
     obs.data.put(
       obs.index.apply(
-        obs.index, args.slice(0, args.length - 1)
+        obs, args.slice(0, args.length - 1)
       ),
       args[args.length - 1]
     );
