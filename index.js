@@ -16,10 +16,10 @@ function ObservNdarray () {
     constructor = arguments[1] && arguments[1].constructor || Ndarray;
   } else {
     // ndarray arguments given
-    data = arguments[0];
-    shape = arguments[1];
-    stride = arguments[2];
-    constuctor = arguments[3] && arguments[3].constructor || Ndarray;
+    data = arguments[0] || [];
+    shape = arguments[1] || [];
+    stride = arguments[2] || [shape[1], 1];
+    constructor = arguments[3] && arguments[3].constructor || Ndarray;
   }
 
   // create observable
