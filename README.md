@@ -57,3 +57,7 @@ state.grid.get(0, 0).green.set(255);
 console.log("---");
 state.grid.get(0, 0).blue.set(255);
 ```
+
+## license
+
+dual-licensed under [AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.html) and [PPL](http://p2pfoundation.net/Peer_Production_License).

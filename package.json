@@ -17,7 +17,13 @@
     "array"
   ],
   "author": "ahdinosaur",
-  "license": "AGPLv3",
+  "licenses": [{
+    "type": "AGPL-3.0",
+    "url": "https://github.com/ahdinosaur/observ-ndarray/raw/master/LICENSE-AGPL-3.0.txt"
+  }, {
+    "type": "PPL",
+    "url": "https://github.com/ahdinosaur/observ-ndarray/raw/master/LICENSE-PPL.txt"
+  }],
   "bugs": {
     "url": "https://github.com/ahdinosaur/observ-ndarray/issues"
   },
